@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+=======
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+>>>>>>> main
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -8,6 +12,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+<<<<<<< HEAD
+=======
+            <option value="$PROJECT_DIR$/user-service" />
+>>>>>>> main
           </set>
         </option>
       </GradleProjectSettings>
