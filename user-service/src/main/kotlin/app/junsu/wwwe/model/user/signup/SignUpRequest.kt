@@ -1,4 +1,4 @@
-package app.junsu.wwwe.domain.model.user.signup
+package app.junsu.wwwe.model.user.signup
 
 data class SignUpRequest(
     val email: String,
