@@ -18,7 +18,7 @@ class UserController(
     fun signUp(
         @RequestBody request: SignUpRequest,
     ) {
-        return userService.signUp(
+        userService.signUp(
             request = request,
         )
     }
