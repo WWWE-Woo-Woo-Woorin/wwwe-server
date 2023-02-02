@@ -3,6 +3,7 @@ package app.junsu.wwwe.service.user
 import app.junsu.wwwe.domain.entity.user.User
 import app.junsu.wwwe.domain.repository.user.UserRepository
 import app.junsu.wwwe.exception.ServerException.UserExistException
+import app.junsu.wwwe.exception.ServerException.UserNotFoundException
 import app.junsu.wwwe.model.user.signup.SignUpRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,9 +19,7 @@ class UserService(
         request: SignUpRequest
     ) {
 
-        userRepository.findByEmail(request.email)?.let {
-            throw UserExistException()
-        }
+        if (userRepository.findByEmail(request.email) == null) throw UserExistException()
 
 
         val user = User(
@@ -37,9 +36,7 @@ class UserService(
         email: String,
     ) {
 
-        userRepository.findByEmail(email)?.let {
-            throw UserExistException()
-        }
+        if (userRepository.findByEmail(email) == null) throw UserExistException()
 
         val user = User(
             email = email,
@@ -51,8 +48,15 @@ class UserService(
     @Transactional(readOnly = true)
     internal fun checkEmailSignedUp(
         email: String,
+    ): Boolean = userRepository.findByEmail(email) != null
+
+    @Transactional(readOnly = true)
+    internal fun checkUsernameEntered(
+        email: String,
     ): Boolean {
 
-        return userRepository.findByEmail(email) != null
+        val user = userRepository.findByEmail(email) ?: throw UserNotFoundException()
+
+        return user.username != null
     }
 }
