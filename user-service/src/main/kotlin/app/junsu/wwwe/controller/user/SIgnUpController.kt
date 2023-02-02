@@ -24,8 +24,19 @@ class SIgnUpController(
     fun enterEmail(
         @RequestParam("email") email: String,
     ) {
-        return userService.enterEmail(
+        userService.enterEmail(
             email = email,
+        )
+    }
+
+    @PatchMapping("/username")
+    fun enterUsername(
+        @RequestParam("email") email: String,
+        @RequestParam("username") username: String,
+    ) {
+        userService.enterUsername(
+            email = email,
+            username = username,
         )
     }
 }
