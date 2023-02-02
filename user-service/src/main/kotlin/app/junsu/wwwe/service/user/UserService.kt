@@ -47,4 +47,12 @@ class UserService(
 
         userRepository.save(user)
     }
+
+    @Transactional(readOnly = true)
+    internal fun checkEmailSignedUp(
+        email: String,
+    ): Boolean {
+
+        return userRepository.findByEmail(email) != null
+    }
 }
