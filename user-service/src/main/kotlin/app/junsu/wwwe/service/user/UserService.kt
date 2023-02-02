@@ -19,7 +19,7 @@ class UserService(
         request: SignUpRequest
     ) {
 
-        if (userRepository.findByEmail(request.email) == null) throw UserExistException()
+        if (userRepository.findByEmail(request.email) != null) throw UserExistException()
 
 
         val user = User(
@@ -36,7 +36,7 @@ class UserService(
         email: String,
     ) {
 
-        if (userRepository.findByEmail(email) == null) throw UserExistException()
+        if (userRepository.findByEmail(email) != null) throw UserExistException()
 
         val user = User(
             email = email,
