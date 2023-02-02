@@ -5,11 +5,24 @@ sealed class ServerException(
     override val message: String,
 ) : RuntimeException(message) {
 
-    data class NotFoundException(
-        override val message: String,
-    ) : ServerException(404, message)
+    data class UserExistException(
+        override val message: String = "User Already Exists",
+    ) : ServerException(
+        code = 409,
+        message = message,
+    )
 
-    data class UnAuthorizedException(
-        override val message: String = "Invalidate Authorization",
-    ) : ServerException(404, message)
+    data class UserNotFoundException(
+        override val message: String = "User Does Not Exists"
+    ) : ServerException(
+        code = 404,
+        message = message,
+    )
+
+    data class PasswordMismatchException(
+        override val message: String = "Password Mismatch"
+    ) : ServerException(
+        code = 400,
+        message = message,
+    )
 }
