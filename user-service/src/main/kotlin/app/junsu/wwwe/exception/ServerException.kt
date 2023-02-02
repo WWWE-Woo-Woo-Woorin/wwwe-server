@@ -13,16 +13,23 @@ sealed class ServerException(
     )
 
     data class UserNotFoundException(
-        override val message: String = "User Does Not Exists"
+        override val message: String = "User Does Not Exists",
     ) : ServerException(
         code = 404,
         message = message,
     )
 
     data class PasswordMismatchException(
-        override val message: String = "Password Mismatch"
+        override val message: String = "Password Mismatch",
     ) : ServerException(
         code = 400,
+        message = message,
+    )
+
+    data class UsernameAlreadyEnteredException(
+        override val message: String = "Username Already Entered",
+    ) : ServerException(
+        code = 409,
         message = message,
     )
 }
