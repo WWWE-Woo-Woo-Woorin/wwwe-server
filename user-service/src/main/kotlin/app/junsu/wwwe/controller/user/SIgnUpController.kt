@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/user")
-class UserController(
+@RequestMapping("/user/signup")
+class SIgnUpController(
     @Autowired private val userService: UserService,
 ) {
 
-    @PostMapping("/signup")
+    @PostMapping
     fun signUp(
         @RequestBody request: SignUpRequest,
     ) {
@@ -20,7 +20,7 @@ class UserController(
         )
     }
 
-    @PostMapping("/signup/email")
+    @PostMapping("/email")
     fun enterEmail(
         @RequestParam("email") email: String,
     ) {
