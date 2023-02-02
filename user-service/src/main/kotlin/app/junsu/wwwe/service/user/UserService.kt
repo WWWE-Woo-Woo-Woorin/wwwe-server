@@ -31,4 +31,20 @@ class UserService(
 
         userRepository.save(user)
     }
+
+    @Transactional
+    internal fun enterEmail(
+        email: String,
+    ) {
+
+        userRepository.findByEmail(email)?.let {
+            throw UserExistException()
+        }
+
+        val user = User(
+            email = email,
+        )
+
+        userRepository.save(user)
+    }
 }
