@@ -19,4 +19,11 @@ class CheckController(
     ): Boolean {
         return userService.checkEmailSignedUp(email)
     }
+
+    @GetMapping("/username")
+    fun checkUsernameEntered(
+        @RequestParam email: String,
+    ): Boolean {
+        return userService.checkUsernameEntered(email)
+    }
 }
