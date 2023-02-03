@@ -34,7 +34,7 @@ class UserService(
 
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    internal fun enterEmail(
+    internal fun signUpEmail(
         email: String,
     ) {
 

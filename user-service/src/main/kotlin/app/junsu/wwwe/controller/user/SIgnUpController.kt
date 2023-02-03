@@ -21,10 +21,10 @@ class SIgnUpController(
     }
 
     @PostMapping("/email")
-    fun enterEmail(
+    fun signUpEmail(
         @RequestParam("email") email: String,
     ) {
-        userService.enterEmail(
+        userService.signUpEmail(
             email = email,
         )
     }
