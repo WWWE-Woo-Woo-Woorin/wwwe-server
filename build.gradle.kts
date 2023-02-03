@@ -30,6 +30,8 @@ subprojects {
 
 		implementation("com.auth0:java-jwt:3.19.2")
 
+		implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+
 		implementation("io.github.microutils:kotlin-logging:1.12.5")
 
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
