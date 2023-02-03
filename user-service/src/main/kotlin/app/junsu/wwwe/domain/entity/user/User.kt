@@ -11,13 +11,13 @@ data class User(
         name = "email",
         nullable = false,
         updatable = false,
+        unique = true,
         length = 64,
     ) val email: String,
     @Column(
         name = "username",
         nullable = true,
         length = 8,
-        unique = true,
     ) var username: String? = null,
     @Column(
         name = "profile_url",
