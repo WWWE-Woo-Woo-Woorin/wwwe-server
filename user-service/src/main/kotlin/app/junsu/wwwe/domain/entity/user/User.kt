@@ -2,10 +2,12 @@ package app.junsu.wwwe.domain.entity.user
 
 import app.junsu.wwwe.domain.entity.base.BaseTimeEntity
 import jakarta.persistence.*
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "tbl_user")
-data class User(
+class User(
     @Id @GeneratedValue(
         strategy = GenerationType.AUTO,
     ) val id: Long? = null,
@@ -29,4 +31,33 @@ data class User(
         nullable = true,
         length = 1024,
     ) var profileUrl: String? = null,
-) : BaseTimeEntity()
+) : BaseTimeEntity(), UserDetails {
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
+        return null
+    }
+
+    override fun getPassword(): String? {
+        return null
+    }
+
+    override fun getUsername(): String {
+        return email
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return true
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isEnabled(): Boolean {
+        return true
+    }
+}
