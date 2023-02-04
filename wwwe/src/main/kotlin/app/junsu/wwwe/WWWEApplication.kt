@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 @SpringBootApplication
 @EnableJpaAuditing
 @ConfigurationPropertiesScan
-class UserServiceApplication
+class WWWEApplication
 
 fun main(args: Array<String>) {
-    runApplication<UserServiceApplication>(*args)
+    runApplication<WWWEApplication>(*args)
 }

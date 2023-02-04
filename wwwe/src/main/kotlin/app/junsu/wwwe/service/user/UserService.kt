@@ -25,7 +25,7 @@ class UserService(
 
         val user = User(
             email = request.email,
-            username = request.username,
+            name = request.username,
             profileUrl = request.profileUrl,
         )
 
@@ -56,9 +56,9 @@ class UserService(
 
         val user = userRepository.findByEmail(email) ?: throw UserNotFoundException()
 
-        if (user.username != null) throw UsernameAlreadyEnteredException()
+        if (user.name != null) throw UsernameAlreadyEnteredException()
 
-        user.username = username
+        user.name = username
 
         userRepository.save(user)
     }
@@ -75,6 +75,6 @@ class UserService(
 
         val user = userRepository.findByEmail(email) ?: throw UserNotFoundException()
 
-        return user.username != null
+        return user.name != null
     }
 }
