@@ -24,7 +24,7 @@ class User(
         name = "username",
         nullable = true,
         length = 8,
-    ) var username: String? = null,
+    ) var name: String? = null,
 
     @Column(
         name = "profile_url",
