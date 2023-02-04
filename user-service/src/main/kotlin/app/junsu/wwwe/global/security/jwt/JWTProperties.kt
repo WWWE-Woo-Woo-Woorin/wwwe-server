@@ -1,10 +1,10 @@
 package app.junsu.wwwe.global.security.jwt
 
-object JWTProperties {
+import org.springframework.boot.context.properties.ConfigurationProperties
 
-    const val tokenValidateTime = 30 * 60 * 1000L
-
-    const val HEADER = "Authorization"
-    const val PREFIX = "Bearer "
-    const val ACCESS = "Access"
-}
+@ConfigurationProperties(prefix = "jwt")
+data class JWTProperties(
+    var secret: String,
+    val accessTokenExp: Long,
+    val refreshTokenExp: Long,
+)
