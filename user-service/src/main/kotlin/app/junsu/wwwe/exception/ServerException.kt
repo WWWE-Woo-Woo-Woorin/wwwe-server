@@ -32,4 +32,11 @@ sealed class ServerException(
         code = 409,
         message = message,
     )
+
+    data class UnauthorizedException(
+        override val message: String = "JWT Not Authorized",
+    ) : ServerException(
+        code = 401,
+        message = message,
+    )
 }
