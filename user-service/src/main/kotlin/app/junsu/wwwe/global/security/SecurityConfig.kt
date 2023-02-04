@@ -1,0 +1,45 @@
+package app.junsu.wwwe.global.security
+
+import app.junsu.wwwe.global.security.filter.FilterConfig
+import app.junsu.wwwe.global.security.jwt.JWTProvider
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.web.SecurityFilterChain
+
+@Configuration
+class SecurityConfig(
+    private val objectMapper: ObjectMapper,
+    private val jwtProvider: JWTProvider,
+) {
+
+    @Bean
+    fun securityFilterChain(
+        http: HttpSecurity,
+    ): SecurityFilterChain {
+        return http.run {
+
+            cors().and()
+            csrf().disable()
+            formLogin().disable()
+
+            sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+            authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/user/signup").permitAll()
+
+                .anyRequest().authenticated()
+
+            apply(
+                FilterConfig(
+                    objectMapper,
+                    jwtProvider,
+                )
+            )
+
+            build()
+        }
+    }
+}
