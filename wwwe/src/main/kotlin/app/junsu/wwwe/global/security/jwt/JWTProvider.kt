@@ -27,7 +27,25 @@ class JWTProvider(
             Date(),
         ).setExpiration(
             Date(
-                System.currentTimeMillis() + securityProperties.tokenValidTime,
+                System.currentTimeMillis() + securityProperties.accessTokenValidTime,
+            ),
+        ).compact()
+    }
+
+    private fun createRefreshToken(
+        email: String,
+    ): String {
+        return Jwts.builder().signWith(
+            SignatureAlgorithm.HS256, securityProperties.secretKey,
+        ).setSubject(
+            email,
+        ).setHeaderParam(
+            Header.JWT_TYPE, JWTComponent.REFRESH,
+        ).setIssuedAt(
+            Date()
+        ).setExpiration(
+            Date(
+                System.currentTimeMillis() + securityProperties.refreshTokenValidTime,
             ),
         ).compact()
     }
@@ -35,7 +53,10 @@ class JWTProvider(
     fun getToken(email: String): TokenResponse {
         return TokenResponse(
             accessToken = createAccessToken(email),
-            accessTokenExp = LocalDateTime.now().plusSeconds(securityProperties.tokenValidTime / 1000)
+            accessTokenExp = LocalDateTime.now().plusSeconds(
+                securityProperties.accessTokenValidTime / 1000,
+            ),
+            refreshToken = createRefreshToken(email),
         )
     }
 }
