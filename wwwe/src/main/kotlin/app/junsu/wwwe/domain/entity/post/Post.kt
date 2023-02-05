@@ -21,7 +21,7 @@ data class Post(
 
     @Column(
         name = "total_likes",
-    ) val totalLikes: Long,
+    ) val totalLikes: Long? = null,
 
     @Column(
         name = "writer",
@@ -30,7 +30,7 @@ data class Post(
 
     @Column(
         name = "total_comments",
-    ) val totalComments: Long,
+    ) val totalComments: Long?= null,
 
     @Column(
         name = "content",
