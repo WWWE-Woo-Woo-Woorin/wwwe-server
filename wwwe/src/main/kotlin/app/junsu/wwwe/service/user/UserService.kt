@@ -4,9 +4,10 @@ import app.junsu.wwwe.domain.entity.user.User
 import app.junsu.wwwe.domain.repository.user.UserRepository
 import app.junsu.wwwe.exception.ServerException.*
 import app.junsu.wwwe.global.security.jwt.JWTProvider
-import app.junsu.wwwe.model.user.auth.TokenResponse
+import app.junsu.wwwe.model.user.common.TokenResponse
 import app.junsu.wwwe.model.user.signin.SignInRequest
 import app.junsu.wwwe.model.user.signup.SignUpRequest
+import app.junsu.wwwe.model.user.token.TokenRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -24,9 +25,7 @@ class UserService(
         request: SignInRequest,
     ): TokenResponse {
 
-        val user = userRepository.findByEmail(request.email) ?: throw UserNotFoundException()
-
-        user.saveDeviceToken(request.deviceToken)
+        userRepository.findByEmail(request.email) ?: throw UserNotFoundException()
 
         return jwtProvider.getToken(request.email)
     }
@@ -46,6 +45,18 @@ class UserService(
         )
 
         userRepository.save(user)
+    }
+
+    @Transactional
+    fun regenerateToken(
+        request: TokenRequest,
+    ): TokenResponse {
+
+        val user = userRepository.findByEmail(request.email) ?: throw UserNotFoundException()
+
+        user.saveDeviceToken(request.deviceToken)
+
+        return jwtProvider.getToken(request.email)
     }
 
     @Transactional
