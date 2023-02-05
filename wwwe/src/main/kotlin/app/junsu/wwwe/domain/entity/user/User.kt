@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails
 @Entity
 @Table(name = "tbl_user")
 class User(
-    @Id @GeneratedValue(
+    @Id @Column(
+        name = "user_id",
+    ) @GeneratedValue(
         strategy = GenerationType.AUTO,
     ) val id: Long? = null,
 
