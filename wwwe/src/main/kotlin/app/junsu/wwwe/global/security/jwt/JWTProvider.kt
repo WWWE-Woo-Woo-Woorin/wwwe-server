@@ -18,7 +18,7 @@ class JWTProvider(
         email: String,
     ): String {
         return Jwts.builder().signWith(
-            SignatureAlgorithm.ES256, securityProperties.secretKey,
+            SignatureAlgorithm.HS256, securityProperties.secretKey,
         ).setSubject(
             email,
         ).setHeaderParam(
