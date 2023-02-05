@@ -1,5 +1,6 @@
 package app.junsu.wwwe.global.security.jwt
 
+import app.junsu.wwwe.global.security.SecurityProperties
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.jsonwebtoken.Jwts
@@ -8,27 +9,19 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
 class JWTParser(
     @Autowired private val userDetailsService: UserDetailsService,
+    @Autowired private val securityProperties: SecurityProperties,
 ) {
-
-    private var secretKey = "what?"
-
-    private val tokenValidTime = 30 * 60 * 1000L
-
-    init {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.toByteArray())
-    }
 
     private fun getClaims(
         token: String,
     ): Jws<Claims> {
         return try {
             Jwts.parser()
-                .setSigningKey(secretKey)
+                .setSigningKey(securityProperties.secretKey)
                 .parseClaimsJws(token)
         } catch (e: Exception) {
             throw e // Todo implement server exceptions
