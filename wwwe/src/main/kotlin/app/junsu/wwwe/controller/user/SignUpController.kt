@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/v1/users/signup")
-class SIgnUpController( // todo rename
+class SignUpController(
     @Autowired private val userService: UserService,
 ) {
 
