@@ -1,54 +1,41 @@
 package app.junsu.wwwe.global.security.jwt
 
-import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jws
+import app.junsu.wwwe.global.security.SecurityProperties
+import app.junsu.wwwe.model.user.auth.TokenResponse
+import io.jsonwebtoken.Header
 import io.jsonwebtoken.Jwts
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
-import org.springframework.security.core.userdetails.UserDetailsService
+import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 import java.util.*
 
 @Component
 class JWTProvider(
-    @Autowired private val userDetailsService: UserDetailsService,
+    private val securityProperties: SecurityProperties,
 ) {
 
-    private var secretKey = "what?"
-
-    private val tokenValidTime = 30 * 60 * 1000L
-
-    init {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.toByteArray())
+    private fun createAccessToken(
+        email: String,
+    ): String {
+        return Jwts.builder().signWith(
+            SignatureAlgorithm.HS256, securityProperties.secretKey,
+        ).setSubject(
+            email,
+        ).setHeaderParam(
+            Header.JWT_TYPE, JWTComponent.ACCESS,
+        ).setIssuedAt(
+            Date(),
+        ).setExpiration(
+            Date(
+                System.currentTimeMillis() + securityProperties.tokenValidTime,
+            ),
+        ).compact()
     }
 
-    private fun getClaims(
-        token: String,
-    ): Jws<Claims> {
-        return try {
-            Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-        } catch (e: Exception) {
-            throw e // Todo implement server exceptions
-        }
-    }
-
-    fun getAuthentication(
-        token: String,
-    ): Authentication {
-
-        val claims = getClaims(token)
-
-        val details = userDetailsService.loadUserByUsername(
-            claims.body.id,
-        )
-
-        return UsernamePasswordAuthenticationToken(
-            details,
-            "",
-            details.authorities,
+    fun getToken(email: String): TokenResponse {
+        return TokenResponse(
+            accessToken = createAccessToken(email),
+            accessTokenExp = LocalDateTime.now().plusSeconds(securityProperties.tokenValidTime / 1000)
         )
     }
 }

@@ -3,6 +3,9 @@ package app.junsu.wwwe.service.user
 import app.junsu.wwwe.domain.entity.user.User
 import app.junsu.wwwe.domain.repository.user.UserRepository
 import app.junsu.wwwe.exception.ServerException.*
+import app.junsu.wwwe.global.security.jwt.JWTProvider
+import app.junsu.wwwe.model.user.auth.TokenResponse
+import app.junsu.wwwe.model.user.signin.SignInRequest
 import app.junsu.wwwe.model.user.signup.SignUpRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -13,10 +16,23 @@ import org.springframework.web.bind.annotation.ResponseStatus
 @Service
 class UserService(
     @Autowired private val userRepository: UserRepository,
+    @Autowired private val jwtProvider: JWTProvider,
 ) {
 
     @Transactional
-    internal fun signUp(
+    internal fun signIn(
+        request: SignInRequest,
+    ): TokenResponse {
+
+        val user = userRepository.findByEmail(request.email) ?: throw UserNotFoundException()
+
+        user.saveDeviceToken(request.deviceToken)
+
+        return jwtProvider.getToken(request.email)
+    }
+
+    @Transactional
+    fun signUp(
         request: SignUpRequest
     ) {
 
@@ -34,7 +50,7 @@ class UserService(
 
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    internal fun signUpEmail(
+    fun signUpEmail(
         email: String,
     ) {
 
@@ -49,7 +65,7 @@ class UserService(
 
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    internal fun enterUsername(
+    fun enterUsername(
         email: String,
         username: String,
     ) {
@@ -64,12 +80,12 @@ class UserService(
     }
 
     @Transactional(readOnly = true)
-    internal fun checkEmailSignedUp(
+    fun checkEmailSignedUp(
         email: String,
     ): Boolean = userRepository.findByEmail(email) != null
 
     @Transactional(readOnly = true)
-    internal fun checkUsernameEntered(
+    fun checkUsernameEntered(
         email: String,
     ): Boolean {
 

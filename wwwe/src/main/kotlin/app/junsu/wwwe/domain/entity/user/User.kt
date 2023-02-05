@@ -31,6 +31,11 @@ class User(
         nullable = true,
         length = 1024,
     ) var profileUrl: String? = null,
+
+    @Column(
+        name = "device_token",
+        nullable = true,
+    ) var deviceToken: String? = null,
 ) : BaseTimeEntity(), UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
@@ -59,5 +64,11 @@ class User(
 
     override fun isEnabled(): Boolean {
         return true
+    }
+
+    fun saveDeviceToken(
+        token: String,
+    ) {
+        this.deviceToken = token
     }
 }

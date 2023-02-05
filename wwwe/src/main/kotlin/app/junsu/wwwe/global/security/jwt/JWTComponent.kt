@@ -4,4 +4,5 @@ object JWTComponent {
 
     const val PREFIX = "Bearer "
     const val HEADER = "Authorization"
+    const val ACCESS = "Access"
 }
