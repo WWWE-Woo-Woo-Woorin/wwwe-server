@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/user/signup")
-class SIgnUpController( // todo rename
+@RequestMapping("/v1/users/signup")
+class SignUpController(
     @Autowired private val userService: UserService,
 ) {
 

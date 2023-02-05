@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/user/check")
+@RequestMapping("/v1/users/check")
 class CheckController(
     @Autowired private val userService: UserService,
 ) {
