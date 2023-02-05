@@ -5,7 +5,8 @@ import java.util.*
 
 @ConfigurationProperties(prefix = "jwt")
 data class SecurityProperties(
-    val tokenValidTime: Long = 30 * 60 * 1000L,
+    val accessTokenValidTime: Long = 30 * 60 * 1000L,
+    val refreshTokenValidTime: Long = 24 * 60 * 60 * 1000L,
     var secretKey: String = "what?",
 ) {
     init {
