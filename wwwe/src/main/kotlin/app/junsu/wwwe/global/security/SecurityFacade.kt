@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
 @Component
-internal class SecurityFacade(
+class SecurityFacade(
     @Autowired private val userRepository: UserRepository,
 ) {
 
