@@ -1,6 +1,6 @@
 package app.junsu.wwwe.controller.user
 
-import app.junsu.wwwe.model.user.auth.TokenResponse
+import app.junsu.wwwe.model.user.common.TokenResponse
 import app.junsu.wwwe.model.user.signin.SignInRequest
 import app.junsu.wwwe.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired

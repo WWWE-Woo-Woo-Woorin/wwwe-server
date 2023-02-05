@@ -1,4 +1,4 @@
-package app.junsu.wwwe.model.user.auth
+package app.junsu.wwwe.model.user.common
 
 import java.time.LocalDateTime
 

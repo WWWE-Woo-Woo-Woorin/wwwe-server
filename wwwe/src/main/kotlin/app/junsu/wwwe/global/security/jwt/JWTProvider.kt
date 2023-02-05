@@ -1,7 +1,7 @@
 package app.junsu.wwwe.global.security.jwt
 
 import app.junsu.wwwe.global.security.SecurityProperties
-import app.junsu.wwwe.model.user.auth.TokenResponse
+import app.junsu.wwwe.model.user.common.TokenResponse
 import io.jsonwebtoken.Header
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
