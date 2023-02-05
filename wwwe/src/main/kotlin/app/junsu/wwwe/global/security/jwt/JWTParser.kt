@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class JWTProvider(
+class JWTParser(
     @Autowired private val userDetailsService: UserDetailsService,
 ) {
 

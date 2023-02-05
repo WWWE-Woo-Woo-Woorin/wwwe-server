@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 
 class JWTFilter(
-    private val jwtParser: JWTProvider
+    private val jwtParser: JWTParser
 ) : OncePerRequestFilter() {
 
     private fun getResolvedToken(
