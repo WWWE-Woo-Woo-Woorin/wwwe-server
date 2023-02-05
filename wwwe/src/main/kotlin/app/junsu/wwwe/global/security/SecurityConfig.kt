@@ -29,9 +29,9 @@ class SecurityConfig(
             sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
             authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/user/signup").permitAll()
-                .requestMatchers(HttpMethod.POST, "/user/signin").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/user/token").permitAll()
+                .requestMatchers(HttpMethod.POST, "/v1/users/signup").permitAll()
+                .requestMatchers(HttpMethod.POST, "/v1/users/signin").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/v1/users/token").permitAll()
 
                 .anyRequest().authenticated()
 
