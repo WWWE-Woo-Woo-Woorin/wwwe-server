@@ -1,28 +1,27 @@
 package app.junsu.wwwe.global.security.jwt
 
+import app.junsu.wwwe.domain.repository.user.UserRepository
 import app.junsu.wwwe.global.security.SecurityProperties
+import app.junsu.wwwe.global.security.auth.AuthDetailsService
 import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jws
 import io.jsonwebtoken.Jwts
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
 
 @Component
 class JWTParser(
-    @Autowired private val userDetailsService: UserDetailsService,
+    @Autowired private val userRepository: UserRepository,
+    @Autowired private val authDetailsService: AuthDetailsService,
     @Autowired private val securityProperties: SecurityProperties,
 ) {
 
     private fun getClaims(
         token: String,
-    ): Jws<Claims> {
+    ): Claims {
         return try {
-            Jwts.parser()
-                .setSigningKey(securityProperties.secretKey)
-                .parseClaimsJws(token)
+            Jwts.parser().setSigningKey(securityProperties.secretKey).parseClaimsJws(token).body
         } catch (e: Exception) {
             throw e // Todo implement server exceptions
         }
@@ -34,9 +33,9 @@ class JWTParser(
 
         val claims = getClaims(token)
 
-        val details = userDetailsService.loadUserByUsername(
-            claims.body.id,
-        )
+        val email = claims.subject
+
+        val details = authDetailsService.loadUserByUsername(email)
 
         return UsernamePasswordAuthenticationToken(
             details,
