@@ -12,7 +12,7 @@ data class Post(
         strategy = GenerationType.AUTO,
     ) val id: Long? = null,
 
-    @MapsId @ManyToOne(
+    @ManyToOne(
         fetch = FetchType.LAZY,
     ) @JoinColumn(
         name = "user_id",
@@ -30,7 +30,7 @@ data class Post(
 
     @Column(
         name = "total_comments",
-    ) val totalComments: Long?= null,
+    ) val totalComments: Long? = null,
 
     @Column(
         name = "content",
