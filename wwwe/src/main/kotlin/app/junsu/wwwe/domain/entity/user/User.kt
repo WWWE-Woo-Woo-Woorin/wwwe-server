@@ -69,7 +69,7 @@ class User(
     }
 
     fun saveDeviceToken(
-        token: String,
+        token: String?,
     ) {
         this.deviceToken = token
     }
