@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails
 @Entity
 @Table(name = "tbl_user")
 class User(
+
     @Id @GeneratedValue(
         strategy = GenerationType.AUTO,
     ) val id: Long? = null,
@@ -67,7 +68,7 @@ class User(
     }
 
     fun saveDeviceToken(
-        token: String,
+        token: String?,
     ) {
         this.deviceToken = token
     }
