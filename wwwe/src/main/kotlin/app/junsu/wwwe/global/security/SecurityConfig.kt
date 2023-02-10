@@ -30,6 +30,7 @@ class SecurityConfig(
 
             authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/v1/users/signup").permitAll()
+                .requestMatchers(HttpMethod.POST, "/v1/users/signup/email").permitAll()
                 .requestMatchers(HttpMethod.POST, "/v1/users/signin").permitAll()
                 .requestMatchers(HttpMethod.GET, "/v1/users/check/email").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/v1/users/token").permitAll()
