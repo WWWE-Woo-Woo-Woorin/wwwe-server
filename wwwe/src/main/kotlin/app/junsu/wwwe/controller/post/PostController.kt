@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/v1/posts")
-class PostController(
+private class PostController(
     @Autowired private val postService: PostService,
 ) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createPost(
+    private fun createPost(
         @RequestBody request: CreatePostRequest,
     ) {
         postService.createPost(request)
     }
+
+    
 }
