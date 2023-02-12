@@ -58,7 +58,7 @@ class UserService(
 
         user.saveDeviceToken(request.deviceToken)
 
-        return jwtProvider.getToken(request.email)
+        return jwtProvider.getToken(user.email)
     }
 
     @Transactional
