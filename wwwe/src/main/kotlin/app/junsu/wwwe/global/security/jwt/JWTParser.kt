@@ -1,6 +1,5 @@
 package app.junsu.wwwe.global.security.jwt
 
-import app.junsu.wwwe.domain.repository.user.UserRepository
 import app.junsu.wwwe.global.security.SecurityProperties
 import app.junsu.wwwe.global.security.auth.AuthDetailsService
 import io.jsonwebtoken.Claims
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class JWTParser(
-    @Autowired private val userRepository: UserRepository,
     @Autowired private val authDetailsService: AuthDetailsService,
     @Autowired private val securityProperties: SecurityProperties,
 ) {
