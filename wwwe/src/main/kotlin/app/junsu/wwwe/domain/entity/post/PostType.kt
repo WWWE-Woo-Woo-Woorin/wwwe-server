@@ -4,7 +4,7 @@ enum class PostType {
     DEFAULT, MAJOR, CLUB, ;
 }
 
-fun String.toPost(): PostType {
+internal fun String.toPost(): PostType {
     return when (this) {
         "DEFAULT" -> PostType.DEFAULT
         "MAJOR" -> PostType.MAJOR
