@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class PostService(
+internal class PostService(
     @Autowired private val postRepository: PostRepository,
     @Autowired private val securityFacade: SecurityFacade,
 ) {

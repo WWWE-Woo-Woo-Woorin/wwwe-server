@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @Service
-class UserService(
+internal class UserService(
     @Autowired private val userRepository: UserRepository,
     @Autowired private val securityFacade: SecurityFacade,
     @Autowired private val jwtProvider: JWTProvider,
@@ -36,7 +36,7 @@ class UserService(
     }
 
     @Transactional
-    fun signUp(
+    internal fun signUp(
         request: SignUpRequest
     ) {
 
@@ -53,7 +53,7 @@ class UserService(
     }
 
     @Transactional
-    fun regenerateToken(
+    internal fun regenerateToken(
         request: TokenRequest,
     ): TokenResponse {
 
@@ -64,7 +64,7 @@ class UserService(
 
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun signUpEmail(
+    internal fun signUpEmail(
         email: String,
     ) {
 
@@ -79,7 +79,7 @@ class UserService(
 
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun enterUsername(
+    internal fun enterUsername(
         email: String,
         username: String,
     ) {
@@ -94,12 +94,12 @@ class UserService(
     }
 
     @Transactional(readOnly = true)
-    fun checkEmailSignedUp(
+    internal fun checkEmailSignedUp(
         email: String,
     ): Boolean = userRepository.findByEmail(email) != null
 
     @Transactional(readOnly = true)
-    fun checkUsernameEntered(
+    internal fun checkUsernameEntered(
         email: String,
     ): Boolean {
 
@@ -109,7 +109,7 @@ class UserService(
     }
 
     @Transactional(readOnly = true)
-    fun fetchUserInformation(): FetchUserInformationResponse {
+    internal fun fetchUserInformation(): FetchUserInformationResponse {
 
         val user = securityFacade.getCurrentUser()
 
