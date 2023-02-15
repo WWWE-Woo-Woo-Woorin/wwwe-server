@@ -41,4 +41,8 @@ data class Post(
         name = "post_image_url",
         length = 1024,
     ) val postImageUrl: String,
+
+    @Enumerated @Column(
+        name = "post_type",
+    ) val postType: PostType
 ) : BaseTimeEntity()
