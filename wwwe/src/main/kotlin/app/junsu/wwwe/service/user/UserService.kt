@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @Service
-internal class UserService(
+class UserService(
     @Autowired private val userRepository: UserRepository,
     @Autowired private val securityFacade: SecurityFacade,
     @Autowired private val jwtProvider: JWTProvider,
