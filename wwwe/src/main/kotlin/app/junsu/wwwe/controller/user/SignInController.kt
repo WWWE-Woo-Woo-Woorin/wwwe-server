@@ -16,7 +16,7 @@ class SignInController(
 ) {
 
     @PostMapping
-    fun signIn(
+    private fun signIn(
         @RequestBody request: SignInRequest,
     ): TokenResponse {
         return userService.signIn(request)

@@ -14,14 +14,14 @@ class CheckController(
 ) {
 
     @GetMapping("/email")
-    fun checkEmailSignedUp(
+    private fun checkEmailSignedUp(
         @RequestParam(name = "email") email: String,
     ): Boolean {
         return userService.checkEmailSignedUp(email)
     }
 
     @GetMapping("/username")
-    fun checkUsernameEntered(
+    private fun checkUsernameEntered(
         @RequestParam(name = "email") email: String,
     ): Boolean {
         return userService.checkUsernameEntered(email)
