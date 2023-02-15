@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails
 class User(
 
     @Id @GeneratedValue(
-        strategy = GenerationType.AUTO,
+        strategy = GenerationType.IDENTITY,
     ) val id: Long? = null,
 
     @Column(

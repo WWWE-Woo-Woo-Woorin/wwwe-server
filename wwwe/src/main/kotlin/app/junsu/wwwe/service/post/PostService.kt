@@ -24,7 +24,6 @@ class PostService(
 
         val post = Post(
             user = user,
-            writer = user.name!!,
             content = request.content,
             postImageUrl = request.postImageUrl,
             postType = request.postType.toPost(),
