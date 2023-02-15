@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class GlobalExceptionHandler {
+private class GlobalExceptionHandler {
 
     private val logger = KotlinLogging.logger {}
 
     @ExceptionHandler(ServerException::class)
-    fun handleServerException(e: ServerException): ErrorResponse {
+    private fun handleServerException(e: ServerException): ErrorResponse {
         return with(e) {
             logger.error { message }
             ErrorResponse(
@@ -22,7 +22,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TokenExpiredException::class)
-    fun handleTokenExpiredException(e: TokenExpiredException): ErrorResponse {
+    private fun handleTokenExpiredException(e: TokenExpiredException): ErrorResponse {
         return with(e) {
             logger.error { message }
             ErrorResponse(
@@ -33,8 +33,8 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    fun handleException(e: Exception): ErrorResponse {
-        return with (e) {
+    private fun handleException(e: Exception): ErrorResponse {
+        return with(e) {
             logger.error { e.message }
             ErrorResponse(
                 code = 500,
