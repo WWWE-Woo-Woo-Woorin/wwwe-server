@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 private class UserController(
     @Autowired private val userService: UserService,
 ) {
+
     @GetMapping
     private fun fetchUserInformation(): FetchUserInformationResponse {
         return userService.fetchUserInformation()

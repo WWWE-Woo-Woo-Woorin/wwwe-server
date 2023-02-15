@@ -2,7 +2,7 @@ package app.junsu.wwwe.global.security
 
 import app.junsu.wwwe.global.security.filter.FilterConfig
 import app.junsu.wwwe.global.security.jwt.JWTParser
-import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -12,8 +12,7 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 class SecurityConfig(
-    private val objectMapper: ObjectMapper,
-    private val jwtParser: JWTParser,
+    @Autowired private val jwtParser: JWTParser,
 ) {
 
     @Bean
@@ -39,7 +38,6 @@ class SecurityConfig(
 
             apply(
                 FilterConfig(
-                    objectMapper,
                     jwtParser,
                 )
             )
