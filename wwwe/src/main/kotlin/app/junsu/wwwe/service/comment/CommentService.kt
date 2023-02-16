@@ -5,7 +5,9 @@ import app.junsu.wwwe.domain.repository.comment.CommentRepository
 import app.junsu.wwwe.domain.repository.post.PostRepository
 import app.junsu.wwwe.exception.ServerException.PostNotFoundException
 import app.junsu.wwwe.global.security.SecurityFacade
+import app.junsu.wwwe.model.comment.CommentResponse
 import app.junsu.wwwe.model.comment.CreateCommentRequest
+import app.junsu.wwwe.model.comment.toResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -34,5 +36,15 @@ class CommentService constructor(
         )
 
         return commentRepository.save(comment)
+    }
+
+    @Transactional(readOnly = true)
+    fun inquireComments(
+        postId: Long,
+    ): List<CommentResponse> {
+
+        val internalComments = commentRepository.findAllByPostId(postId)
+
+        return internalComments.toResponse().toList()
     }
 }
