@@ -2,6 +2,7 @@ package app.junsu.wwwe.controller.comment
 
 import app.junsu.wwwe.model.comment.CommentResponse
 import app.junsu.wwwe.model.comment.CreateCommentRequest
+import app.junsu.wwwe.model.comment.UpdateCommentRequest
 import app.junsu.wwwe.service.comment.CommentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -31,6 +32,19 @@ private class CommentController(
     ): List<CommentResponse> {
         return commentService.inquireComments(
             postId = postId,
+        )
+    }
+
+    @PatchMapping("/{comment-id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private fun updateComment(
+        @PathVariable("post-id") postId: Long,
+        @PathVariable("comment-id") commentId: Long,
+        @RequestBody request: UpdateCommentRequest,
+    ) {
+        commentService.updateComment(
+            commentId = commentId,
+            request = request,
         )
     }
 }
