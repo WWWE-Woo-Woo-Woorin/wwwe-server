@@ -11,7 +11,10 @@ data class CommentResponse(
     val createdAt: LocalDateTime,
 )
 
-internal fun Comment.toResponse(): CommentResponse {
+internal fun Comment?.toResponse(): CommentResponse {
+
+    require(this != null)
+
     return CommentResponse(
         postId = this.post.id!!,
         commentId = this.id!!,
@@ -21,7 +24,7 @@ internal fun Comment.toResponse(): CommentResponse {
     )
 }
 
-internal fun Iterable<Comment>.toResponse(): Iterable<CommentResponse> {
+internal fun Iterable<Comment?>.toResponse(): Iterable<CommentResponse> {
     return this.map {
         it.toResponse()
     }
