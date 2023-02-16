@@ -3,7 +3,7 @@ package app.junsu.wwwe.model.comment
 import app.junsu.wwwe.domain.entity.comment.Comment
 import java.time.LocalDateTime
 
-internal data class CommentResponse(
+data class CommentResponse(
     val postId: Long,
     val commentId: Long,
     val writer: String,
