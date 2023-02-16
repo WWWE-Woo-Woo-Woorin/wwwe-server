@@ -1,5 +1,6 @@
 package app.junsu.wwwe.controller.comment
 
+import app.junsu.wwwe.model.comment.CommentResponse
 import app.junsu.wwwe.model.comment.CreateCommentRequest
 import app.junsu.wwwe.service.comment.CommentService
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,6 +22,15 @@ private class CommentController(
         commentService.createComment(
             postId = postId,
             request = request,
+        )
+    }
+
+    @GetMapping
+    private fun inquireComments(
+        @PathVariable("post-id") postId: Long,
+    ): List<CommentResponse> {
+        return commentService.inquireComments(
+            postId = postId,
         )
     }
 }
