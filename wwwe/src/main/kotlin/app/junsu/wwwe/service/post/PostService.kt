@@ -8,6 +8,7 @@ import app.junsu.wwwe.exception.ServerException.PostNotFoundException
 import app.junsu.wwwe.global.security.SecurityFacade
 import app.junsu.wwwe.model.post.CreatePostRequest
 import app.junsu.wwwe.model.post.PostResponse
+import app.junsu.wwwe.model.post.UpdatePostRequest
 import app.junsu.wwwe.model.post.toResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -37,6 +38,14 @@ class PostService(
     }
 
     @Transactional(readOnly = true)
+    internal fun inquireAllPosts(): List<PostResponse> {
+
+        val internalPosts = postRepository.findAll()
+
+        return internalPosts.toResponse().toList()
+    }
+
+    @Transactional(readOnly = true)
     internal fun inquirePosts(
         postType: PostType,
     ): List<PostResponse> {
@@ -58,6 +67,29 @@ class PostService(
         ) ?: throw PostNotFoundException()
 
         return internalPost.toResponse()
+    }
+
+    @Transactional
+    internal fun updatePost(
+        postId: Long,
+        request: UpdatePostRequest,
+    ): PostResponse {
+
+        val internalPost = postRepository.findPostById(
+            id = postId,
+        ) ?: throw PostNotFoundException()
+
+        val newPost = Post(
+            id = internalPost.id!!,
+            user = internalPost.user,
+            totalLikes = internalPost.totalLikes,
+            totalComments = internalPost.totalComments,
+            content = internalPost.content,
+            postImageUrl = internalPost.postImageUrl,
+            postType = internalPost.postType,
+        )
+
+        return postRepository.save(newPost).toResponse()
     }
 
     @Transactional
