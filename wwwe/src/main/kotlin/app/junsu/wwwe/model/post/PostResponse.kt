@@ -11,7 +11,10 @@ internal data class PostResponse(
     val createdAt: LocalDateTime,
 )
 
-internal fun Post.toResponse(): PostResponse {
+internal fun Post?.toResponse(): PostResponse {
+
+    require(this != null)
+
     return PostResponse(
         postId = this.id!!,
         writer = this.user.name!!,
@@ -21,7 +24,7 @@ internal fun Post.toResponse(): PostResponse {
     )
 }
 
-internal fun Iterable<Post>.toResponse(): Iterable<PostResponse> {
+internal fun Iterable<Post?>.toResponse(): Iterable<PostResponse> {
     return this.map {
         it.toResponse()
     }
