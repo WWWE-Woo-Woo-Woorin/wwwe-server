@@ -30,9 +30,7 @@ class UserService(
 
         val user = userRepository.findByEmail(request.email) ?: throw UserNotFoundException()
 
-        return jwtProvider.getToken(request.email).also {
-            user.saveDeviceToken(request.deviceToken)
-        }
+        return jwtProvider.getToken(user.email)
     }
 
     @Transactional

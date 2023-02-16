@@ -19,6 +19,13 @@ sealed class ServerException(
         message = message,
     )
 
+    data class PostNotFoundException(
+        override val message: String = "Post Does Not Exists",
+    ) : ServerException(
+        code = 404,
+        message = message,
+    )
+
     data class UserExistException(
         override val message: String = "User Already Exists",
     ) : ServerException(
