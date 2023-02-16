@@ -23,6 +23,11 @@ private class PostController(
     }
 
     @GetMapping
+    private fun inquireAllPosts(): List<PostResponse> {
+        return postService.inquireAllPosts()
+    }
+
+    @GetMapping
     private fun inquirePosts(
         @RequestParam postsType: PostType,
     ): List<PostResponse> {
@@ -39,6 +44,8 @@ private class PostController(
             postId = postId,
         )
     }
+
+
 
     @DeleteMapping("/{post-id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
