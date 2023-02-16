@@ -21,7 +21,7 @@ internal fun Post.toResponse(): PostResponse {
     )
 }
 
-internal fun List<Post>.toResponse(): List<PostResponse> {
+internal fun Iterable<Post>.toResponse(): Iterable<PostResponse> {
     return this.map {
         it.toResponse()
     }
