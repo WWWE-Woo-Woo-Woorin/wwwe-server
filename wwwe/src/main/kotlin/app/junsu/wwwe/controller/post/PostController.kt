@@ -1,8 +1,8 @@
 package app.junsu.wwwe.controller.post
 
-import app.junsu.wwwe.domain.entity.post.Post
 import app.junsu.wwwe.domain.entity.post.PostType
 import app.junsu.wwwe.model.post.CreatePostRequest
+import app.junsu.wwwe.model.post.PostResponse
 import app.junsu.wwwe.service.post.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -25,7 +25,7 @@ private class PostController(
     @GetMapping
     private fun inquirePosts(
         @RequestParam postsType: PostType,
-    ): List<Post> {
+    ): List<PostResponse> {
         return postService.inquirePosts(
             postType = postsType,
         )
