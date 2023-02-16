@@ -19,6 +19,4 @@ private class PostController(
     ) {
         postService.createPost(request)
     }
-
-    
 }

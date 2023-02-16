@@ -1,8 +1,8 @@
 package app.junsu.wwwe.service.post
 
 import app.junsu.wwwe.domain.entity.post.Post
+import app.junsu.wwwe.domain.entity.post.toPost
 import app.junsu.wwwe.domain.repository.post.PostRepository
-import app.junsu.wwwe.domain.repository.user.UserRepository
 import app.junsu.wwwe.global.security.SecurityFacade
 import app.junsu.wwwe.model.post.CreatePostRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,9 +24,9 @@ class PostService(
 
         val post = Post(
             user = user,
-            writer = user.name!!,
             content = request.content,
             postImageUrl = request.postImageUrl,
+            postType = request.postType.toPost(),
         )
 
         return postRepository.save(post)

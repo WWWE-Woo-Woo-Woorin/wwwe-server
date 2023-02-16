@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails
 class User(
 
     @Id @GeneratedValue(
-        strategy = GenerationType.AUTO,
+        strategy = GenerationType.IDENTITY,
     ) val id: Long? = null,
 
     @Column(
@@ -34,9 +34,9 @@ class User(
     ) var profileUrl: String? = null,
 
     @Column(
-        name = "device_token",
+        name = "access_token",
         nullable = true,
-    ) var deviceToken: String? = null,
+    ) var accessToken: String? = null,
 ) : BaseTimeEntity(), UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
@@ -70,6 +70,6 @@ class User(
     fun saveDeviceToken(
         token: String?,
     ) {
-        this.deviceToken = token
+        this.accessToken = token
     }
 }
