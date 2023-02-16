@@ -15,7 +15,7 @@ internal fun List<Post>.toResponse(): List<PostResponse> {
     return this.map {
         PostResponse(
             postId = it.id!!,
-            writer = it.user.username,
+            writer = it.user.name!!,
             content = it.content,
             postImageUrl = it.postImageUrl,
             createdAt = it.createdAt!!,
