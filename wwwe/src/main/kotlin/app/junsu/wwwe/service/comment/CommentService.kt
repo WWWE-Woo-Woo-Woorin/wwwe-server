@@ -3,10 +3,12 @@ package app.junsu.wwwe.service.comment
 import app.junsu.wwwe.domain.entity.comment.Comment
 import app.junsu.wwwe.domain.repository.comment.CommentRepository
 import app.junsu.wwwe.domain.repository.post.PostRepository
+import app.junsu.wwwe.exception.ServerException.CommentNotFoundException
 import app.junsu.wwwe.exception.ServerException.PostNotFoundException
 import app.junsu.wwwe.global.security.SecurityFacade
 import app.junsu.wwwe.model.comment.CommentResponse
 import app.junsu.wwwe.model.comment.CreateCommentRequest
+import app.junsu.wwwe.model.comment.UpdateCommentRequest
 import app.junsu.wwwe.model.comment.toResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -25,7 +27,9 @@ class CommentService constructor(
         request: CreateCommentRequest,
     ): Comment {
 
-        val post = postRepository.findPostById(postId) ?: throw PostNotFoundException()
+        val post = postRepository.findPostById(
+            id = postId,
+        ) ?: throw PostNotFoundException()
 
         val user = securityFacade.getCurrentUser()
 
@@ -43,8 +47,30 @@ class CommentService constructor(
         postId: Long,
     ): List<CommentResponse> {
 
-        val internalComments = commentRepository.findAllByPostId(postId)
+        val internalComments = commentRepository.findAllByPostId(
+            postId = postId,
+        )
 
         return internalComments.toResponse().toList()
+    }
+
+    @Transactional
+    fun updateComment(
+        commentId: Long,
+        request: UpdateCommentRequest,
+    ): Comment {
+
+        val internalComment = commentRepository.findCommentById(
+            commentId = commentId,
+        ) ?: throw CommentNotFoundException()
+
+        val newComment = Comment(
+            id = internalComment.id!!,
+            post = internalComment.post,
+            user = internalComment.user,
+            content = request.content,
+        )
+
+        return commentRepository.save(newComment)
     }
 }
