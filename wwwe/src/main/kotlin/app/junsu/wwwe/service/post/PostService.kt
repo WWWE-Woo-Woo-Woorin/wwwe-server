@@ -59,4 +59,11 @@ class PostService(
 
         return internalPost.toResponse()
     }
+
+    @Transactional
+    internal fun deletePost(
+        postId: Long,
+    ) {
+        return postRepository.deleteById(postId)
+    }
 }
