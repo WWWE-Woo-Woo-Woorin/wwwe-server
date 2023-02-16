@@ -34,8 +34,18 @@ private class PostController(
     @GetMapping("/{post-id}")
     private fun inquirePost(
         @PathVariable("post-id") postId: Long,
-    ) : PostResponse {
+    ): PostResponse {
         return postService.inquirePost(
+            postId = postId,
+        )
+    }
+
+    @DeleteMapping("/{post-id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private fun deletePost(
+        @PathVariable("post-id") postId: Long,
+    ) {
+        postService.deletePost(
             postId = postId,
         )
     }
