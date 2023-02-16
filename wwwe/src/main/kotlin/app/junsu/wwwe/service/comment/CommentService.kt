@@ -21,7 +21,7 @@ class CommentService constructor(
     fun createComment(
         postId: Long,
         request: CreateCommentRequest,
-    ) {
+    ): Comment {
 
         val post = postRepository.findPostById(postId) ?: throw PostNotFoundException()
 
@@ -33,6 +33,6 @@ class CommentService constructor(
             user = user,
         )
 
-        commentRepository.save(comment)
+        return commentRepository.save(comment)
     }
 }
