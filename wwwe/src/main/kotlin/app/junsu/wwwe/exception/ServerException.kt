@@ -5,10 +5,10 @@ sealed class ServerException(
     override val message: String,
 ) : RuntimeException(message) {
 
-    data class UserExistException(
-        override val message: String = "User Already Exists",
+    data class UnauthorizedException(
+        override val message: String = "JWT Not Authorized",
     ) : ServerException(
-        code = 409,
+        code = 401,
         message = message,
     )
 
@@ -19,10 +19,24 @@ sealed class ServerException(
         message = message,
     )
 
-    data class PasswordMismatchException(
-        override val message: String = "Password Mismatch",
+    data class PostNotFoundException(
+        override val message: String = "Post Does Not Exists",
     ) : ServerException(
-        code = 400,
+        code = 404,
+        message = message,
+    )
+
+    data class CommentNotFoundException(
+        override val message: String = "Comment Does Not Exists",
+    ) : ServerException(
+        code = 404,
+        message = message,
+    )
+
+    data class UserExistException(
+        override val message: String = "User Already Exists",
+    ) : ServerException(
+        code = 409,
         message = message,
     )
 
@@ -30,13 +44,6 @@ sealed class ServerException(
         override val message: String = "Username Already Entered",
     ) : ServerException(
         code = 409,
-        message = message,
-    )
-
-    data class UnauthorizedException(
-        override val message: String = "JWT Not Authorized",
-    ) : ServerException(
-        code = 401,
         message = message,
     )
 }

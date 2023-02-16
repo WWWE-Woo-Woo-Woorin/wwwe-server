@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/v1/users/token")
-internal class TokenController(
+private class TokenController(
     @Autowired private val userService: UserService,
 ) {
 
     @PutMapping
-    fun regenerateToken(
+    private fun regenerateToken(
         @RequestBody request: TokenRequest,
     ): TokenResponse {
         return userService.regenerateToken(request)
