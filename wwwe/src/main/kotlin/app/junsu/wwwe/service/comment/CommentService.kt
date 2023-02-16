@@ -58,7 +58,7 @@ class CommentService constructor(
     fun updateComment(
         commentId: Long,
         request: UpdateCommentRequest,
-    ): Comment {
+    ): CommentResponse {
 
         val internalComment = commentRepository.findCommentById(
             commentId = commentId,
@@ -71,6 +71,6 @@ class CommentService constructor(
             content = request.content,
         )
 
-        return commentRepository.save(newComment)
+        return commentRepository.save(newComment).toResponse()
     }
 }
