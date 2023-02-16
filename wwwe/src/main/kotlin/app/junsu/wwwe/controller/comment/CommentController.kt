@@ -18,6 +18,8 @@ private class CommentController(
         @PathVariable("post-id") parameter: String,
         @RequestBody request: CreateCommentRequest,
     ) {
-
+        commentService.createComment(
+            request = request,
+        )
     }
 }
