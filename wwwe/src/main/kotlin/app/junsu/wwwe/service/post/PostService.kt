@@ -4,6 +4,7 @@ import app.junsu.wwwe.domain.entity.post.Post
 import app.junsu.wwwe.domain.entity.post.PostType
 import app.junsu.wwwe.domain.entity.post.toPost
 import app.junsu.wwwe.domain.repository.post.PostRepository
+import app.junsu.wwwe.exception.ServerException.PostNotFoundException
 import app.junsu.wwwe.global.security.SecurityFacade
 import app.junsu.wwwe.model.post.CreatePostRequest
 import app.junsu.wwwe.model.post.PostResponse
@@ -45,5 +46,15 @@ class PostService(
         )
 
         return internalPosts.toResponse()
+    }
+
+    @Transactional(readOnly = true)
+    internal fun inquirePost(
+        postId: Long,
+    ): PostResponse {
+
+        val internalPost = postRepository.findPostById(postId) ?: throw PostNotFoundException()
+
+        return internalPost.toResponse()
     }
 }
