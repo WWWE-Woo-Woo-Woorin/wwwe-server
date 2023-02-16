@@ -37,6 +37,14 @@ class PostService(
     }
 
     @Transactional(readOnly = true)
+    internal fun inquireAllPosts(): List<PostResponse> {
+
+        val internalPosts = postRepository.findAll()
+
+        return internalPosts.toResponse().toList()
+    }
+
+    @Transactional(readOnly = true)
     internal fun inquirePosts(
         postType: PostType,
     ): List<PostResponse> {
