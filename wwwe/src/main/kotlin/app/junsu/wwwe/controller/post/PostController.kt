@@ -30,4 +30,13 @@ private class PostController(
             postType = postsType,
         )
     }
+
+    @GetMapping("/{post-id}")
+    private fun inquirePost(
+        @PathVariable("post-id") postId: Long,
+    ) : PostResponse {
+        return postService.inquirePost(
+            postId = postId,
+        )
+    }
 }
