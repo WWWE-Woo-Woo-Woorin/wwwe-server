@@ -45,7 +45,7 @@ class PostService(
             postType = postType,
         )
 
-        return internalPosts.toResponse()
+        return internalPosts.toResponse().toList()
     }
 
     @Transactional(readOnly = true)
