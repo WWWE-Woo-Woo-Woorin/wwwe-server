@@ -25,7 +25,7 @@ class CommentService constructor(
     fun createComment(
         postId: Long,
         request: CreateCommentRequest,
-    ): Comment {
+    ): CommentResponse {
 
         val post = postRepository.findPostById(
             id = postId,
@@ -39,7 +39,7 @@ class CommentService constructor(
             user = user,
         )
 
-        return commentRepository.save(comment)
+        return commentRepository.save(comment).toResponse()
     }
 
     @Transactional(readOnly = true)

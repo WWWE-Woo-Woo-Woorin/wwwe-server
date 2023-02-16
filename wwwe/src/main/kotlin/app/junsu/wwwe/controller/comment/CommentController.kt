@@ -20,8 +20,8 @@ private class CommentController(
     private fun createComment(
         @PathVariable("post-id") postId: Long,
         @RequestBody request: CreateCommentRequest,
-    ) {
-        commentService.createComment(
+    ): CommentResponse {
+        return commentService.createComment(
             postId = postId,
             request = request,
         )
