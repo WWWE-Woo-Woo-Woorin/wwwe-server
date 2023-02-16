@@ -11,14 +11,18 @@ internal data class PostResponse(
     val createdAt: LocalDateTime,
 )
 
+internal fun Post.toResponse(): PostResponse {
+    return PostResponse(
+        postId = this.id!!,
+        writer = this.user.name!!,
+        content = this.content,
+        postImageUrl = this.postImageUrl,
+        createdAt = this.createdAt!!,
+    )
+}
+
 internal fun List<Post>.toResponse(): List<PostResponse> {
     return this.map {
-        PostResponse(
-            postId = it.id!!,
-            writer = it.user.name!!,
-            content = it.content,
-            postImageUrl = it.postImageUrl,
-            createdAt = it.createdAt!!,
-        )
+        it.toResponse()
     }
 }
