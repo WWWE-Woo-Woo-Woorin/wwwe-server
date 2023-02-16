@@ -1,9 +1,28 @@
 package app.junsu.wwwe.model.comment
 
+import app.junsu.wwwe.domain.entity.comment.Comment
+import java.time.LocalDateTime
+
 internal data class CommentResponse(
     val postId: Long,
     val commentId: Long,
     val writer: String,
     val content: String,
-    val createdAt: String,
+    val createdAt: LocalDateTime,
 )
+
+internal fun Comment.toResponse(): CommentResponse {
+    return CommentResponse(
+        postId = this.post.id!!,
+        commentId = this.id!!,
+        writer = this.user.name!!,
+        content = this.content,
+        createdAt = this.createdAt!!,
+    )
+}
+
+internal fun Iterable<Comment>.toResponse(): Iterable<CommentResponse> {
+    return this.map {
+        it.toResponse()
+    }
+}
