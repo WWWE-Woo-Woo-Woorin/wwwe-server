@@ -22,7 +22,7 @@ class PostService(
     @Transactional
     internal fun createPost(
         request: CreatePostRequest,
-    ): Post {
+    ): PostResponse {
 
         val user = securityFacade.getCurrentUser()
 
@@ -33,7 +33,7 @@ class PostService(
             postType = request.postType.toPost(),
         )
 
-        return postRepository.save(post)
+        return postRepository.save(post).toResponse()
     }
 
     @Transactional(readOnly = true)
@@ -45,7 +45,7 @@ class PostService(
             postType = postType,
         )
 
-        return internalPosts.toResponse()
+        return internalPosts.toResponse().toList()
     }
 
     @Transactional(readOnly = true)

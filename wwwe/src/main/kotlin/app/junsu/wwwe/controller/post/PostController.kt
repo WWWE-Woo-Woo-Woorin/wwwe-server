@@ -18,8 +18,8 @@ private class PostController(
     @ResponseStatus(HttpStatus.CREATED)
     private fun createPost(
         @RequestBody request: CreatePostRequest,
-    ) {
-        postService.createPost(request)
+    ) : PostResponse{
+       return postService.createPost(request)
     }
 
     @GetMapping

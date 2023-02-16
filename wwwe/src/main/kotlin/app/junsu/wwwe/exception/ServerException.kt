@@ -26,6 +26,13 @@ sealed class ServerException(
         message = message,
     )
 
+    data class CommentNotFoundException(
+        override val message: String = "Comment Does Not Exists",
+    ) : ServerException(
+        code = 404,
+        message = message,
+    )
+
     data class UserExistException(
         override val message: String = "User Already Exists",
     ) : ServerException(
