@@ -11,8 +11,10 @@ import app.junsu.wwwe.model.comment.CreateCommentRequest
 import app.junsu.wwwe.model.comment.UpdateCommentRequest
 import app.junsu.wwwe.model.comment.toResponse
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.bind.annotation.ResponseStatus
 
 @Service
 class CommentService constructor(
@@ -22,7 +24,7 @@ class CommentService constructor(
 ) {
 
     @Transactional
-    fun createComment(
+    internal fun createComment(
         postId: Long,
         request: CreateCommentRequest,
     ): CommentResponse {
@@ -43,7 +45,7 @@ class CommentService constructor(
     }
 
     @Transactional(readOnly = true)
-    fun inquireComments(
+    internal fun inquireComments(
         postId: Long,
     ): List<CommentResponse> {
 
@@ -55,7 +57,7 @@ class CommentService constructor(
     }
 
     @Transactional
-    fun updateComment(
+    internal fun updateComment(
         commentId: Long,
         request: UpdateCommentRequest,
     ): CommentResponse {
@@ -72,5 +74,13 @@ class CommentService constructor(
         )
 
         return commentRepository.save(newComment).toResponse()
+    }
+
+    @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    internal fun deleteComment(
+        commentId: Long,
+    ) {
+        return postRepository.deleteById(commentId)
     }
 }
