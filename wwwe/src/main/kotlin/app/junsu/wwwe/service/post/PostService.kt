@@ -1,6 +1,7 @@
 package app.junsu.wwwe.service.post
 
 import app.junsu.wwwe.domain.entity.post.Post
+import app.junsu.wwwe.domain.entity.post.PostType
 import app.junsu.wwwe.domain.entity.post.toPost
 import app.junsu.wwwe.domain.repository.post.PostRepository
 import app.junsu.wwwe.global.security.SecurityFacade
@@ -30,5 +31,14 @@ class PostService(
         )
 
         return postRepository.save(post)
+    }
+
+    @Transactional(readOnly = true)
+    internal fun inquirePosts(
+        postType: PostType,
+    ): List<Post> {
+        return postRepository.findAllByPostType(
+            postType = postType,
+        )
     }
 }
