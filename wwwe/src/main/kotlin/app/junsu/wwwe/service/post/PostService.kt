@@ -53,7 +53,9 @@ class PostService(
         postId: Long,
     ): PostResponse {
 
-        val internalPost = postRepository.findPostById(postId) ?: throw PostNotFoundException()
+        val internalPost = postRepository.findPostById(
+            id = postId,
+        ) ?: throw PostNotFoundException()
 
         return internalPost.toResponse()
     }
