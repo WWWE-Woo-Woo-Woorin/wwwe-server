@@ -15,10 +15,11 @@ private class CommentController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private fun createComment(
-        @PathVariable("post-id") parameter: String,
+        @PathVariable("post-id") postId: Long,
         @RequestBody request: CreateCommentRequest,
     ) {
         commentService.createComment(
+            postId = postId,
             request = request,
         )
     }
