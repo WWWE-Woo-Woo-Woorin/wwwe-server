@@ -28,9 +28,9 @@ private class PostController(
         return postService.inquireAllPosts()
     }
 
-    @GetMapping
+    @GetMapping("/type")
     private fun inquirePosts(
-        @RequestParam postsType: PostType,
+        @RequestParam("type") postsType: PostType,
     ): List<PostResponse> {
         return postService.inquirePosts(
             postType = postsType,
