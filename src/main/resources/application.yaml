@@ -12,4 +12,4 @@ spring:
     hibernate:
       format_sql: true
 server:
-  port: 9090
+  port: 8080
