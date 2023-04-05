@@ -99,3 +99,23 @@ class PostService(
         return postRepository.deleteById(postId)
     }
 }
+
+fun main() {
+    var str = "Try Hello World!"
+
+    solution(str)
+}
+
+fun solution(s: String): String {
+    var answer = ""
+
+    s.lowercase().forEach {
+        answer += if (it.code % 2 == 0) {
+            it.uppercase()
+        } else {
+            it.uppercase()
+        }
+    }
+
+    return answer
+}
