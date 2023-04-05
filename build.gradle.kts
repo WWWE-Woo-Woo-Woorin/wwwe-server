@@ -24,14 +24,15 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security:3.0.2")
 
-    implementation("com.auth0:java-jwt:3.19.2")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 
     implementation("io.github.microutils:kotlin-logging:1.12.5")
 
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
