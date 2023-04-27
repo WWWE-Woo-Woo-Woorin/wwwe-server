@@ -1,9 +1,9 @@
 package app.junsu.wwwe.exception
 
-import com.auth0.jwt.exceptions.TokenExpiredException
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.client.HttpClientErrorException.Unauthorized
 
 @RestControllerAdvice
 private class GlobalExceptionHandler {
@@ -21,8 +21,8 @@ private class GlobalExceptionHandler {
         }
     }
 
-    @ExceptionHandler(TokenExpiredException::class)
-    private fun handleTokenExpiredException(e: TokenExpiredException): ErrorResponse {
+    @ExceptionHandler(Unauthorized::class)
+    private fun handleTokenExpiredException(e: Unauthorized): ErrorResponse {
         return with(e) {
             logger.error { message }
             ErrorResponse(
