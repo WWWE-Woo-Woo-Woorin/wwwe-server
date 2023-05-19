@@ -37,8 +37,8 @@ class CommentService constructor(
 
         val comment = Comment(
             content = request.content,
-            post = post,
-            user = user,
+            postId = post,
+            userId = user,
         )
 
         return commentRepository.save(comment).toResponse()
@@ -68,8 +68,8 @@ class CommentService constructor(
 
         val newComment = Comment(
             id = internalComment.id!!,
-            post = internalComment.post,
-            user = internalComment.user,
+            postId = internalComment.postId,
+            userId = internalComment.userId,
             content = request.content,
         )
 

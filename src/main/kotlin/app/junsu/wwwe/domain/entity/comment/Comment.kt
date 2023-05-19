@@ -15,11 +15,11 @@ class Comment(
 
     @ManyToOne(
         fetch = FetchType.EAGER,
-    ) val post: Post,
+    ) val postId: Post,
 
     @ManyToOne(
         fetch = FetchType.EAGER,
-    ) val user: User,
+    ) val userId: User,
 
     @Column(
         name = "content",

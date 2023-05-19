@@ -113,7 +113,7 @@ class UserService(
 
         return FetchUserInformationResponse(
             email = user.email,
-            username = user.username,
+            username = user.name ?: "Username not defined",
             profileUrl = user.profileUrl,
         )
     }

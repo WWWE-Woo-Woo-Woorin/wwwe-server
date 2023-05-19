@@ -16,9 +16,9 @@ internal fun Comment?.toResponse(): CommentResponse {
     require(this != null)
 
     return CommentResponse(
-        postId = this.post.id!!,
+        postId = this.postId.id!!,
         commentId = this.id!!,
-        writer = this.user.name!!,
+        writer = this.userId.name!!,
         content = this.content,
         createdAt = this.createdAt!!,
     )

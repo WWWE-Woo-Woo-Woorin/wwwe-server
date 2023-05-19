@@ -14,7 +14,7 @@ class Post(
 
     @ManyToOne(
         fetch = FetchType.EAGER,
-    ) val user: User,
+    ) val userId: User,
 
     @Column(
         name = "total_likes",

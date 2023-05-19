@@ -17,7 +17,7 @@ internal fun Post?.toResponse(): PostResponse {
 
     return PostResponse(
         postId = this.id!!,
-        writer = this.user.name!!,
+        writer = this.userId.name!!,
         content = this.content,
         postImageUrl = this.postImageUrl,
         createdAt = this.createdAt!!,
