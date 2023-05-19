@@ -1,4 +1,4 @@
-package app.junsu.wwwe.controller.comment
+package app.junsu.wwwe.controller
 
 import app.junsu.wwwe.model.comment.CommentResponse
 import app.junsu.wwwe.model.comment.CreateCommentRequest

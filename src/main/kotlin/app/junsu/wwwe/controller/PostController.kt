@@ -1,4 +1,4 @@
-package app.junsu.wwwe.controller.post
+package app.junsu.wwwe.controller
 
 import app.junsu.wwwe.domain.entity.post.PostType
 import app.junsu.wwwe.model.post.CreatePostRequest
