@@ -14,34 +14,33 @@ import org.springframework.security.web.SecurityFilterChain
 class SecurityConfig(
     @Autowired private val jwtParser: JWTParser,
 ) {
-
     @Bean
     fun securityFilterChain(
         http: HttpSecurity,
     ): SecurityFilterChain {
         return http.run {
-
             cors().and()
             csrf().disable()
             formLogin().disable()
-
             sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
             authorizeHttpRequests()
+
+                // users
                 .requestMatchers(HttpMethod.POST, "/v1/users/signup").permitAll()
                 .requestMatchers(HttpMethod.POST, "/v1/users/signup/email").permitAll()
                 .requestMatchers(HttpMethod.POST, "/v1/users/signin").permitAll()
                 .requestMatchers(HttpMethod.GET, "/v1/users/check/email").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/v1/users/token").permitAll()
 
-                .anyRequest().authenticated()
+                // posts
+                .requestMatchers(HttpMethod.GET, "/v1/posts").permitAll()
 
+                .anyRequest().authenticated()
             apply(
                 FilterConfig(
                     jwtParser,
                 )
             )
-
             build()
         }
     }
