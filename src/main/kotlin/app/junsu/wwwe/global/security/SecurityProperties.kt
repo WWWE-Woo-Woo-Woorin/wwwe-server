@@ -1,12 +1,12 @@
 package app.junsu.wwwe.global.security
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import java.util.*
+import java.util.Base64
 
 @ConfigurationProperties(prefix = "jwt")
 data class SecurityProperties(
-    val accessTokenValidTime: Long = 30 * 60 * 1000L,
-    val refreshTokenValidTime: Long = 24 * 60 * 60 * 1000L,
+    val accessTokenValidTime: Long = 24 * 60 * 60 * 1000L,
+    val refreshTokenValidTime: Long = 14 * 24 * 60 * 60 * 1000L,
     var secretKey: String = "what?",
 ) {
     init {
