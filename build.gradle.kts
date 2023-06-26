@@ -36,7 +36,7 @@ dependencies {
 
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
-    runtimeOnly("mysql:mysql-connector-java")
+    implementation("mysql:mysql-connector-java:8.0.33")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
