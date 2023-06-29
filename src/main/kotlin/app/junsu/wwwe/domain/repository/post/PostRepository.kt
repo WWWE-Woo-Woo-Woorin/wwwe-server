@@ -8,5 +8,5 @@ interface PostRepository : JpaRepository<Post, Long> {
 
     fun findPostById(id: Long): Post?
 
-    fun findAllByPostType(postType: PostType): List<Post?>
+    fun findAllByPostType(postType: PostType): List<Post>
 }

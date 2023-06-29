@@ -8,27 +8,24 @@ internal data class PostResponse(
     val postId: Long,
     val postType: PostType,
     val writer: String,
+    val writerProfileImageUrl: String,
     val content: String,
     val postImageUrl: String,
     val createdAt: LocalDateTime,
 )
 
-internal fun Post?.toResponse(): PostResponse {
-
-    require(this != null)
-
+internal fun Post.toResponse(): PostResponse {
     return PostResponse(
         postId = this.id!!,
         postType = this.postType,
-        writer = this.userId.name!!,
+        writer = this.user.name!!,
+        writerProfileImageUrl = this.user.profileUrl!!,
         content = this.content,
         postImageUrl = this.postImageUrl,
         createdAt = this.createdAt!!,
     )
 }
 
-internal fun Iterable<Post?>.toResponse(): Iterable<PostResponse> {
-    return this.map {
-        it.toResponse()
-    }
+internal fun List<Post>.toResponse(): List<PostResponse> {
+    return if (this.isEmpty()) emptyList() else this.map { it.toResponse() }
 }

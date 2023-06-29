@@ -28,7 +28,7 @@ class PostService(
         val user = securityFacade.getCurrentUser()
 
         val post = Post(
-            userId = user,
+            user = user,
             content = request.content,
             postImageUrl = request.postImageUrl,
             postType = request.postType.toPost(),
@@ -81,7 +81,7 @@ class PostService(
 
         val newPost = Post(
             id = internalPost.id!!,
-            userId = internalPost.userId,
+            user = internalPost.user,
             totalLikes = internalPost.totalLikes,
             totalComments = internalPost.totalComments,
             content = internalPost.content,

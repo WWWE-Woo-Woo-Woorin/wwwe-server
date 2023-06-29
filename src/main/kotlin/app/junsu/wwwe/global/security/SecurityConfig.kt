@@ -32,9 +32,6 @@ class SecurityConfig(
                 .requestMatchers(HttpMethod.GET, "/v1/users/check/email").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/v1/users/token").permitAll()
 
-                // posts
-                .requestMatchers(HttpMethod.GET, "/v1/posts").permitAll()
-
                 .anyRequest().authenticated()
             apply(
                 FilterConfig(
