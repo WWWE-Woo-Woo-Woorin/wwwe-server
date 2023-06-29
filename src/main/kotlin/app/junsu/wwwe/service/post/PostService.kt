@@ -1,5 +1,6 @@
 package app.junsu.wwwe.service.post
 
+import app.junsu.wwwe.domain.entity._common.TimeOrder
 import app.junsu.wwwe.domain.entity.post.Post
 import app.junsu.wwwe.domain.entity.post.PostType
 import app.junsu.wwwe.domain.entity.post.toPost
@@ -38,11 +39,13 @@ class PostService(
     }
 
     @Transactional(readOnly = true)
-    internal fun inquireAllPosts(): List<PostResponse> {
-
+    internal fun inquireAllPosts(order: TimeOrder): List<PostResponse> {
         val internalPosts = postRepository.findAll()
-
-        return internalPosts.toResponse().toList()
+        val response = internalPosts.toResponse().toList()
+        return when (order) {
+            TimeOrder.LATEST -> response.reversed()
+            TimeOrder.OLDEST -> response
+        }
     }
 
     @Transactional(readOnly = true)

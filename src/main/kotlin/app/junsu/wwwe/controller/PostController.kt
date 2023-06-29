@@ -1,5 +1,6 @@
 package app.junsu.wwwe.controller
 
+import app.junsu.wwwe.domain.entity._common.TimeOrder
 import app.junsu.wwwe.domain.entity.post.PostType
 import app.junsu.wwwe.model.post.CreatePostRequest
 import app.junsu.wwwe.model.post.PostResponse
@@ -24,8 +25,13 @@ private class PostController(
     }
 
     @GetMapping
-    private fun inquireAllPosts(): List<PostResponse> {
-        return postService.inquireAllPosts()
+    private fun inquireAllPosts(
+        @RequestParam(
+            name = "order",
+            required = false,
+        ) order: TimeOrder?,
+    ): List<PostResponse> {
+        return postService.inquireAllPosts(order ?: TimeOrder.LATEST)
     }
 
     @GetMapping("/type")
