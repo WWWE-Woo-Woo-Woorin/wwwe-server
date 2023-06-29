@@ -35,7 +35,7 @@ class UserService(
 
     @Transactional
     internal fun signUp(
-        request: SignUpRequest
+        request: SignUpRequest,
     ) {
 
         if (userRepository.findByEmail(request.email) != null) throw UserExistException()
