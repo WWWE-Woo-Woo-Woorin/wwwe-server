@@ -35,7 +35,7 @@ private class GlobalExceptionHandler {
     @ExceptionHandler
     private fun handleException(e: Exception): ErrorResponse {
         return with(e) {
-            logger.error { e.message }
+            logger.error { e.message + '\n' + e.stackTrace.map { it.toString() + '\n' } }
             ErrorResponse(
                 code = 500,
                 message = "Internal server error",
